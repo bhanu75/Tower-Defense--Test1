@@ -8,6 +8,7 @@ import { GameStats, TowerType } from './types';
 
 export class GameEngine {
   private isRunning: boolean = false;
+  private canvasCtx: CanvasRenderingContext2D | null = null;
   private towerPool: ObjectPool<Tower>;
   private enemyPool: ObjectPool<Enemy>;
   private projectilePool: ObjectPool<Projectile>;
@@ -18,7 +19,7 @@ export class GameEngine {
     score: 0,
     lives: 100,
     gold: 500,
-    wave: 1,
+    wave: 0,
     fps: 60,
     isPaused: false,
     gameSpeed: 1,
@@ -33,6 +34,10 @@ export class GameEngine {
     this.projectilePool = new ObjectPool<Projectile>(() => new Projectile());
   }
 
+  public init(ctx: CanvasRenderingContext2D): void {
+    this.canvasCtx = ctx;
+  }
+
   public start(): void {
     this.isRunning = true;
     this.loop();
@@ -42,38 +47,9 @@ export class GameEngine {
     this.isRunning = false;
   }
 
-  public resetAll(): void {
-    this.towerPool.resetAll();
-    this.enemyPool.resetAll();
-    this.projectilePool.resetAll();
-  }
-
-  public addTower(position: { x: number; y: number }, type: TowerType): void {
-    const tower = new Tower(position, type, 0);
-    tower.cooldown = 0;
-    tower.targetEnemy = null;
-  }
-
-  public createProjectile(
-    pos: { x: number; y: number },
-    targetPos: { x: number; y: number },
-    speed: number,
-    damage: number
-  ): void {
-    const proj = this.projectilePool.obtain();
-    proj.position = pos;
-    proj.targetPosition = targetPos;
-    proj.speed = speed;
-    proj.damage = damage;
-  }
-
-  public updateTower(tower: Tower): void {
-    if (tower.cooldown > 0) {
-      tower.cooldown--;
-    }
-    if (tower.targetEnemy) {
-      tower.targetEnemy.hp -= 10;
-    }
+  public triggerNextWave(): void {
+    this.waveManager.startNextWave();
+    this.stats.wave = this.waveManager.currentWave;
   }
 
   private loop(): void {
@@ -83,6 +59,28 @@ export class GameEngine {
     requestAnimationFrame(() => this.loop());
   }
 
-  private update(): void {}
-  private render(): void {}
+  private update(): void {
+    this.waveManager.update();
+  }
+
+  private render(): void {
+    if (!this.canvasCtx) return;
+
+    // Clear Screen
+    this.canvasCtx.fillStyle = '#1e1e2f';
+    this.canvasCtx.fillRect(0, 0, 800, 600);
+
+    // Draw Track Line
+    this.canvasCtx.strokeStyle = '#334155';
+    this.canvasCtx.lineWidth = 20;
+    this.canvasCtx.beginPath();
+    this.canvasCtx.moveTo(0, 300);
+    this.canvasCtx.lineTo(800, 300);
+    this.canvasCtx.stroke();
+
+    // Draw Enemies
+    this.waveManager.activeEnemies.forEach((enemy) => {
+      enemy.draw(this.canvasCtx!);
+    });
+  }
 }
