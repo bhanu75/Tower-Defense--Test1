@@ -7,13 +7,13 @@ interface UIOverlayProps {
 
 export default function UIOverlay({ stats }: UIOverlayProps) {
   return (
-    
-      Lives: {stats.lives}
-      Gold: {stats.gold}
-      Wave: {stats.wave}
-      Status: {stats.isPaused ? 'Paused' : 'Playing'}
-      Speed: {stats.gameSpeed ?? 1}x
-      Spatial Grid: {stats.useSpatialGrid ? 'ON' : 'OFF'}
-    
+    <div className="ui-overlay">
+      <div>Lives: {stats.lives}</div>
+      <div>Gold: {stats.gold}</div>
+      <div>Wave: {stats.wave}</div>
+      <div>Status: {stats.isPaused ? 'Paused' : 'Playing'}</div>
+      <div>Speed: {stats.gameSpeed ?? 1}x</div>
+      <div>Spatial Grid: {stats.useSpatialGrid ? 'ON' : 'OFF'}</div>
+    </div>
   );
 }
