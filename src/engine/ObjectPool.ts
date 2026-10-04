@@ -1,4 +1,4 @@
-export class ObjectPool {
+export class ObjectPool<T> {
   private pool: T[] = [];
   private factory: () => T;
 
