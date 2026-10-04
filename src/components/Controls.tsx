@@ -15,7 +15,7 @@ export default function Controls({
 }: ControlsProps) {
   const handleStartWave = () => {
     if (engineRef.current) {
-      // Wave logic
+      engineRef.current.triggerNextWave();
     }
   };
 
