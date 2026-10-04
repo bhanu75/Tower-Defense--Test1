@@ -24,5 +24,5 @@ export class Projectile {
   }
 
   public update(): void {}
-  public draw(ctx: CanvasRenderingContext2D): void {}
+  public draw(_ctx: CanvasRenderingContext2D): void {}
 }
