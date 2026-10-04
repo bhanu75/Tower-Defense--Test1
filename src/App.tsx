@@ -1,47 +1,32 @@
 import React, { useState, useRef } from 'react';
-import { GameCanvas } from './components/GameCanvas';
-import { UIOverlay } from './components/UIOverlay';
+import GameCanvas from './components/GameCanvas';
+import UIOverlay from './components/UIOverlay';
+import Controls from './components/Controls';
+import BenchmarkPanel from './components/BenchmarkPanel';
 import { GameEngine } from './engine/GameEngine';
 import { GameStats, TowerType } from './engine/types';
 
-export const App: React.FC = () => {
-  const engineRef = useRef<GameEngine | null>(null);
-  const [selectedTowerType, setSelectedTowerType] = useState<TowerType | null>('archer');
-  const [stats, setStats] = useState<GameStats>({
-    hp: 100,
-    gold: 350,
+export default function App() {
+  const [stats, setStats] = useState({
     score: 0,
+    lives: 100,
+    gold: 500,
     wave: 1,
     fps: 60,
-    frameTime: 16.6,
-    activeEnemies: 0,
-    activeProjectiles: 0,
-    activeTowers: 0,
     isPaused: false,
     gameSpeed: 1,
-    isBenchmarkMode: false,
     useSpatialGrid: true,
-    isGameOver: false,
-    isVictory: false,
   });
 
-  return (
-    <div className="w-screen h-screen bg-slate-950 flex flex-col justify-center items-center relative overflow-hidden">
-      <div className="relative w-[1280px] h-[720px]">
-        <GameCanvas onStatsUpdate={setStats} selectedTowerType={selectedTowerType} engineRef={engineRef} />
-        <UIOverlay
-          stats={stats}
-          selectedTowerType={selectedTowerType}
-          onSelectTower={setSelectedTowerType}
-          onTogglePause={() => engineRef.current?.togglePause()}
-          onSetSpeed={(s) => engineRef.current?.setSpeed(s)}
-          onRestart={() => engineRef.current?.restart()}
-          onTriggerBenchmark={() => engineRef.current?.triggerBenchmarkMode()}
-          onToggleSpatialGrid={() => engineRef.current?.toggleSpatialGrid()}
-        />
-      </div>
-    </div>
-  );
-};
+  const [selectedTowerType, setSelectedTowerType] = useState(null);
+  const engineRef = useRef(null);
 
-export default App;
+  return (
+    
+      
+      
+      
+      
+    
+  );
+}

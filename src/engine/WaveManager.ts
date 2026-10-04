@@ -7,5 +7,5 @@ export class WaveManager {
     this.currentWave++;
   }
 
-  public update(deltaTime: number): void {}
+  public update(_deltaTime: number): void {}
 }

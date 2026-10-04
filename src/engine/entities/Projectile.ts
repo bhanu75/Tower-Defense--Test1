@@ -1,46 +1,31 @@
-import { Enemy } from '../types';
+import { Vector2D } from '../types';
 
-export class ProjectileEntity {
-  public id: number;
+export class Projectile {
+  public position: Vector2D;
+  public targetPosition: Vector2D;
+  public speed: number = 5;
+  public damage: number = 10;
   public active: boolean = false;
-  public x: number = 0;
-  public y: number = 0;
-  public targetX: number = 0;
-  public targetY: number = 0;
-  public speed: number = 12;
-  public damage: number = 25;
-  public splashRadius: number = 0;
-  public slowEffect: boolean = false;
-  public targetEnemy: Enemy | null = null;
 
-  constructor(id: number) {
-    this.id = id;
-  }
-
-  public init(
-    x: number,
-    y: number,
-    targetX: number,
-    targetY: number,
-    damage: number,
-    splashRadius: number,
-    slowEffect: boolean,
-    targetEnemy: Enemy | null = null
+  constructor(
+    position: Vector2D = { x: 0, y: 0 },
+    targetPosition: Vector2D = { x: 0, y: 0 },
+    speed: number = 5,
+    damage: number = 10,
+    type: string = 'basic',
+    splashRadius: number = 0,
+    targetEnemyId: string = ''
   ) {
-    this.active = true;
-    this.x = x;
-    this.y = y;
-    this.targetX = targetX;
-    this.targetY = targetY;
+    this.position = position;
+    this.targetPosition = targetPosition;
+    this.speed = speed;
     this.damage = damage;
-    this.splashRadius = splashRadius;
-    this.slowEffect = slowEffect;
-    this.speed = 12;
-    this.targetEnemy = targetEnemy;
   }
 
-  public reset() {
+  public reset(): void {
     this.active = false;
-    this.targetEnemy = null;
   }
+
+  public update(): void {}
+  public draw(ctx: CanvasRenderingContext2D): void {}
 }
