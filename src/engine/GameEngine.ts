@@ -8,11 +8,11 @@ import { GameStats, TowerType } from './types';
 
 export class GameEngine {
   private isRunning: boolean = false;
-  private towerPool: ObjectPool;
-  private enemyPool: ObjectPool;
-  private projectilePool: ObjectPool;
-  private spatialGrid: SpatialGrid;
-  private waveManager: WaveManager;
+  private towerPool: ObjectPool<Tower>;
+  private enemyPool: ObjectPool<Enemy>;
+  private projectilePool: ObjectPool<Projectile>;
+  public spatialGrid: SpatialGrid;
+  public waveManager: WaveManager;
 
   public stats: GameStats = {
     score: 0,
@@ -28,9 +28,9 @@ export class GameEngine {
   constructor() {
     this.spatialGrid = new SpatialGrid();
     this.waveManager = new WaveManager();
-    this.towerPool = new ObjectPool(() => new Tower({ x: 0, y: 0 }));
-    this.enemyPool = new ObjectPool(() => new Enemy());
-    this.projectilePool = new ObjectPool(() => new Projectile());
+    this.towerPool = new ObjectPool<Tower>(() => new Tower({ x: 0, y: 0 }));
+    this.enemyPool = new ObjectPool<Enemy>(() => new Enemy());
+    this.projectilePool = new ObjectPool<Projectile>(() => new Projectile());
   }
 
   public start(): void {
