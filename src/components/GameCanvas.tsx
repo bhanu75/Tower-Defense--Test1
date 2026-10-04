@@ -3,9 +3,9 @@ import { GameEngine } from '../engine/GameEngine';
 import { TowerType, GameStats } from '../engine/types';
 
 export interface GameCanvasProps {
-  onStatsUpdate: React.Dispatch>;
+  onStatsUpdate: React.Dispatch<React.SetStateAction<GameStats>>;
   selectedTowerType: TowerType | null;
-  engineRef?: MutableRefObject;
+  engineRef?: MutableRefObject<GameEngine | null>;
 }
 
 export default function GameCanvas({
@@ -13,7 +13,7 @@ export default function GameCanvas({
   selectedTowerType,
   engineRef,
 }: GameCanvasProps) {
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const engine = new GameEngine();
@@ -27,5 +27,5 @@ export default function GameCanvas({
     };
   }, [engineRef]);
 
-  return ;
+  return <canvas ref={canvasRef} width={800} height={600} />;
 }
