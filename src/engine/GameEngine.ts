@@ -58,10 +58,7 @@ export class GameEngine {
     pos: { x: number; y: number },
     targetPos: { x: number; y: number },
     speed: number,
-    damage: number,
-    type: string,
-    splashRadius: number,
-    targetId: string
+    damage: number
   ): void {
     const proj = this.projectilePool.obtain();
     proj.position = pos;

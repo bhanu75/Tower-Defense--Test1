@@ -15,7 +15,7 @@ export default function Controls({
 }: ControlsProps) {
   const handleStartWave = () => {
     if (engineRef.current) {
-      // wave logic
+      // Wave handling logic
     }
   };
 

@@ -11,10 +11,7 @@ export class Projectile {
     position: Vector2D = { x: 0, y: 0 },
     targetPosition: Vector2D = { x: 0, y: 0 },
     speed: number = 5,
-    damage: number = 10,
-    type: string = 'basic',
-    splashRadius: number = 0,
-    targetEnemyId: string = ''
+    damage: number = 10
   ) {
     this.position = position;
     this.targetPosition = targetPosition;
