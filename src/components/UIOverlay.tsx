@@ -1,4 +1,3 @@
-import React from 'react';
 import { GameStats } from '../engine/types';
 
 interface UIOverlayProps {
