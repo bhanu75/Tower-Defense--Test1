@@ -7,9 +7,9 @@ interface BenchmarkPanelProps {
 
 export default function BenchmarkPanel({ stats }: BenchmarkPanelProps) {
   return (
-    
-      FPS: {stats.fps}
-      Score: {stats.score}
-    
+    <div className="benchmark-panel">
+      <p>FPS: {stats.fps}</p>
+      <p>Score: {stats.score}</p>
+    </div>
   );
 }
