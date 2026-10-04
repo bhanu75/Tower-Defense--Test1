@@ -7,7 +7,7 @@ import { GameEngine } from './engine/GameEngine';
 import { GameStats, TowerType } from './engine/types';
 
 export default function App() {
-  const [stats, setStats] = useState({
+  const [stats, setStats] = useState<GameStats>({
     score: 0,
     lives: 100,
     gold: 500,
@@ -18,15 +18,23 @@ export default function App() {
     useSpatialGrid: true,
   });
 
-  const [selectedTowerType, setSelectedTowerType] = useState(null);
-  const engineRef = useRef(null);
+  const [selectedTowerType, setSelectedTowerType] = useState<TowerType | null>(null);
+  const engineRef = useRef<GameEngine | null>(null);
 
   return (
-    
-      
-      
-      
-      
-    
+    <div className="app-container">
+      <GameCanvas
+        onStatsUpdate={setStats}
+        selectedTowerType={selectedTowerType}
+        engineRef={engineRef}
+      />
+      <UIOverlay stats={stats} />
+      <Controls
+        selectedTowerType={selectedTowerType}
+        onSelectTower={setSelectedTowerType}
+        engineRef={engineRef}
+      />
+      <BenchmarkPanel stats={stats} />
+    </div>
   );
 }
