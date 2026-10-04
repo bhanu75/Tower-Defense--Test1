@@ -1,5 +1,4 @@
-
-import React, { MutableRefObject } from 'react';
+import { MutableRefObject } from 'react';
 import { TowerType } from '../engine/types';
 import { GameEngine } from '../engine/GameEngine';
 
@@ -16,7 +15,7 @@ export default function Controls({
 }: ControlsProps) {
   const handleStartWave = () => {
     if (engineRef.current) {
-      // Wave start logic
+      // Wave logic
     }
   };
 
