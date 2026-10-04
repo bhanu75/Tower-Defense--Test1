@@ -1,13 +1,13 @@
 export class SpatialGrid {
-  private cellSize: number;
+  public cellSize: number;
 
   constructor(cellSize: number = 64) {
     this.cellSize = cellSize;
   }
 
   public clear(): void {}
-  public insert(entity: any): void {}
-  public getNearby(entity: any): any[] {
+  public insert(_entity: unknown): void {}
+  public getNearby(_entity: unknown): unknown[] {
     return [];
   }
 }
