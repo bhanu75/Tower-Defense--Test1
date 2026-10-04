@@ -1,15 +1,15 @@
 import React from 'react';
+import { GameStats } from '../engine/types';
 
 interface BenchmarkPanelProps {
-  fps?: number;
-  entityCount?: number;
+  stats: GameStats;
 }
 
-export default function BenchmarkPanel({ fps = 60, entityCount = 0 }: BenchmarkPanelProps) {
+export default function BenchmarkPanel({ stats }: BenchmarkPanelProps) {
   return (
     
-      FPS: {fps}
-      Active Entities: {entityCount}
+      FPS: {stats.fps}
+      Score: {stats.score}
     
   );
 }
