@@ -1,3 +1,4 @@
+
 import React, { MutableRefObject } from 'react';
 import { TowerType } from '../engine/types';
 import { GameEngine } from '../engine/GameEngine';
@@ -5,7 +6,7 @@ import { GameEngine } from '../engine/GameEngine';
 interface ControlsProps {
   selectedTowerType: TowerType | null;
   onSelectTower: (type: TowerType | null) => void;
-  engineRef: MutableRefObject;
+  engineRef: MutableRefObject<GameEngine | null>;
 }
 
 export default function Controls({
@@ -15,19 +16,19 @@ export default function Controls({
 }: ControlsProps) {
   const handleStartWave = () => {
     if (engineRef.current) {
-      // Wave handling logic
+      // Wave start logic
     }
   };
 
   return (
-    
-      Start Wave
-       onSelectTower('basic')}>
+    <div className="controls-panel">
+      <button onClick={handleStartWave}>Start Wave</button>
+      <button onClick={() => onSelectTower('basic')}>
         Basic {selectedTowerType === 'basic' ? '(Selected)' : ''}
-      
-       onSelectTower('sniper')}>
+      </button>
+      <button onClick={() => onSelectTower('sniper')}>
         Sniper {selectedTowerType === 'sniper' ? '(Selected)' : ''}
-      
-    
+      </button>
+    </div>
   );
 }
